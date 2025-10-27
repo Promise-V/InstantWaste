@@ -265,7 +265,22 @@ public class WasteFormApi {
                 "version", "1.0.0"
         ));
     }
+    @GetMapping("/")
+    public ResponseEntity<?> root() {
+        return ResponseEntity.ok(Map.of(
+                "status", "ok",
+                "message", "Instant Waste API",
+                "version", "1.0.0"
+        ));
+    }
 
+    @GetMapping("")  // This handles /api
+    public ResponseEntity<?> apiRoot() {
+        return ResponseEntity.ok(Map.of(
+                "status", "ok",
+                "message", "Instant Waste API - v1.0.0"
+        ));
+    }
     @RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> handleOptions() {
         return ResponseEntity.ok().build();
