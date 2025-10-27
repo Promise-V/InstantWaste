@@ -45,20 +45,37 @@ public class VisionOcr {
         if (credentialsJson != null && !credentialsJson.isEmpty()) {
             System.out.println("✓ Loading Google credentials from environment variable");
 
-            // Decode base64 credentials
-            byte[] decoded = Base64.getDecoder().decode(credentialsJson);
-            GoogleCredentials credentials = GoogleCredentials
-                    .fromStream(new ByteArrayInputStream(decoded));
+            try {
+                // Remove any whitespace/newlines
+                credentialsJson = credentialsJson.trim().replaceAll("\\s+", "");
 
-            ImageAnnotatorSettings settings = ImageAnnotatorSettings.newBuilder()
-                    .setCredentialsProvider(FixedCredentialsProvider.create(credentials))
-                    .build();
+                // Check if it's already JSON (starts with {) or base64
+                GoogleCredentials credentials;
+                if (credentialsJson.startsWith("{")) {
+                    // It's raw JSON
+                    System.out.println("✓ Detected raw JSON credentials");
+                    credentials = GoogleCredentials.fromStream(
+                            new ByteArrayInputStream(credentialsJson.getBytes())
+                    );
+                } else {
+                    // It's base64 encoded
+                    System.out.println("✓ Detected base64 credentials");
+                    byte[] decoded = Base64.getDecoder().decode(credentialsJson);
+                    credentials = GoogleCredentials.fromStream(new ByteArrayInputStream(decoded));
+                }
 
-            return ImageAnnotatorClient.create(settings);
+                ImageAnnotatorSettings settings = ImageAnnotatorSettings.newBuilder()
+                        .setCredentialsProvider(FixedCredentialsProvider.create(credentials))
+                        .build();
+
+                return ImageAnnotatorClient.create(settings);
+            } catch (Exception e) {
+                System.err.println("❌ Failed to load credentials: " + e.getMessage());
+                throw e;
+            }
         }
 
         System.out.println("⚠️ No GOOGLE_CREDENTIALS_JSON found, using default credentials");
-        // Fallback for local development
         return ImageAnnotatorClient.create();
     }
 
