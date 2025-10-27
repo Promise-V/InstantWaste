@@ -1,9 +1,13 @@
 package com.instantwaste;
 import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.api.gax.core.FixedCredentialsProvider;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class VisionOcr {
@@ -18,7 +22,7 @@ public class VisionOcr {
         public int width;
         public int height;
 
-        public  TextBlock(String text, int x, int y, int width, int height) {
+        public TextBlock(String text, int x, int y, int width, int height) {
             this.text = text;
             this.x = x;
             this.y = y;
@@ -33,6 +37,32 @@ public class VisionOcr {
     }
 
     /**
+     * Creates ImageAnnotatorClient with credentials from environment variable
+     */
+    private static ImageAnnotatorClient createVisionClient() throws IOException {
+        String credentialsJson = System.getenv("GOOGLE_CREDENTIALS_JSON");
+
+        if (credentialsJson != null && !credentialsJson.isEmpty()) {
+            System.out.println("✓ Loading Google credentials from environment variable");
+
+            // Decode base64 credentials
+            byte[] decoded = Base64.getDecoder().decode(credentialsJson);
+            GoogleCredentials credentials = GoogleCredentials
+                    .fromStream(new ByteArrayInputStream(decoded));
+
+            ImageAnnotatorSettings settings = ImageAnnotatorSettings.newBuilder()
+                    .setCredentialsProvider(FixedCredentialsProvider.create(credentials))
+                    .build();
+
+            return ImageAnnotatorClient.create(settings);
+        }
+
+        System.out.println("⚠️ No GOOGLE_CREDENTIALS_JSON found, using default credentials");
+        // Fallback for local development
+        return ImageAnnotatorClient.create();
+    }
+
+    /**
      * Performs OCR and returns list of text blocks with bounding boxes
      *
      * @param inputPath Path to the input image file
@@ -42,7 +72,7 @@ public class VisionOcr {
     public static List<TextBlock> performOcrWithBoundingBoxes(String inputPath, boolean includeEmpty) {
         List<TextBlock> results = new ArrayList<>();
 
-        try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
+        try (ImageAnnotatorClient vision = createVisionClient()) {
             // Read the image file
             ByteString imgBytes = ByteString.readFrom(new FileInputStream(inputPath));
 
