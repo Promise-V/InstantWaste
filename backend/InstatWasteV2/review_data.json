@@ -1,0 +1,1359 @@
+{
+  "confidentFields": 50,
+  "tables": [
+    {
+      "tableType": "COMPLETED_WASTE_2COL",
+      "rows": [
+        {
+          "item": "Muffin 21",
+          "rowIndex": 0
+        },
+        {
+          "item": "Reg Bun",
+          "rowIndex": 1
+        },
+        {
+          "item": "Muffin ༡༡ 1/4 Bun",
+          "rowIndex": 2
+        },
+        {
+          "item": "Muffin Mac Bun",
+          "rowIndex": 3
+        },
+        {
+          "item": "Choc Muffin 23 Potato",
+          "rowIndex": 4
+        },
+        {
+          "item": "Muffin Oat Bun",
+          "rowIndex": 5
+        },
+        {
+          "item": "Wheat",
+          "rowIndex": 6
+        },
+        {
+          "item": "Tortilla",
+          "rowIndex": 7
+        },
+        {
+          "item": "24",
+          "rowIndex": 8
+        },
+        {
+          "item": "English",
+          "rowIndex": 9
+        },
+        {
+          "item": "25 Plain Bagels",
+          "rowIndex": 10
+        },
+        {
+          "item": "Cookie Everything",
+          "rowIndex": 11
+        },
+        {
+          "item": "Cookie 26 Sesame",
+          "rowIndex": 12
+        },
+        {
+          "item": "Berry Griddles",
+          "rowIndex": 13
+        },
+        {
+          "item": "White Choc Hotcakes",
+          "rowIndex": 14
+        },
+        {
+          "item": "27",
+          "rowIndex": 15
+        },
+        {
+          "item": "Haz . \u0026 Cocoa",
+          "rowIndex": 16
+        },
+        {
+          "item": "LTO 28 Reg Meat",
+          "rowIndex": 17
+        },
+        {
+          "item": "1/4 Meat",
+          "rowIndex": 18
+        },
+        {
+          "item": "Smoothie 29",
+          "rowIndex": 19
+        },
+        {
+          "item": "Smoothie Filet",
+          "rowIndex": 20
+        },
+        {
+          "item": ". Smoothie 30 Grilled Chicken",
+          "rowIndex": 21
+        },
+        {
+          "item": "McChicken",
+          "rowIndex": 22
+        },
+        {
+          "item": "Nuggets",
+          "rowIndex": 23
+        },
+        {
+          "item": "31 Junior Chicken",
+          "rowIndex": 24
+        },
+        {
+          "item": "McCrispy",
+          "rowIndex": 25
+        },
+        {
+          "item": "32 Pizza Bites",
+          "rowIndex": 26
+        },
+        {
+          "item": "33 Bacon Strips",
+          "rowIndex": 27
+        },
+        {
+          "item": "34 Fnes",
+          "rowIndex": 28
+        },
+        {
+          "item": "Hash Browns",
+          "rowIndex": 29
+        },
+        {
+          "item": "Milk",
+          "rowIndex": 30
+        },
+        {
+          "item": "35",
+          "rowIndex": 31
+        },
+        {
+          "item": "36 Eggs",
+          "rowIndex": 32
+        },
+        {
+          "item": "Burrito",
+          "rowIndex": 33
+        },
+        {
+          "item": "Tea 37 Sausage",
+          "rowIndex": 34
+        },
+        {
+          "item": "Cdn Bacon",
+          "rowIndex": 35
+        },
+        {
+          "item": "Tea",
+          "rowIndex": 36
+        },
+        {
+          "item": "Tea Cheese",
+          "rowIndex": 37
+        },
+        {
+          "item": "39 Shredded",
+          "rowIndex": 38
+        },
+        {
+          "item": "Cheese",
+          "rowIndex": 39
+        },
+        {
+          "item": "40",
+          "rowIndex": 40
+        },
+        {
+          "item": "Grill seasoning",
+          "rowIndex": 41
+        },
+        {
+          "item": "AT Bulk salt",
+          "rowIndex": 42
+        },
+        {
+          "item": "LTO Fry",
+          "rowIndex": 43
+        },
+        {
+          "item": "LTO 42",
+          "rowIndex": 44
+        },
+        {
+          "item": "43",
+          "rowIndex": 45
+        },
+        {
+          "item": "Side 44",
+          "rowIndex": 46
+        }
+      ],
+      "tableName": "Table_2_2Column"
+    },
+    {
+      "tableType": "COMPLETED_WASTE_2COL",
+      "rows": [
+        {
+          "item": "Fruit \u0026 Fibre",
+          "rowIndex": 0
+        },
+        {
+          "item": "Carrot Muffin",
+          "rowIndex": 1
+        },
+        {
+          "item": ". Burger Cranberry",
+          "rowIndex": 2
+        },
+        {
+          "item": "3 Blueberry",
+          "rowIndex": 3
+        },
+        {
+          "item": "Banana",
+          "rowIndex": 4
+        },
+        {
+          "item": "A Choc . Brownie",
+          "rowIndex": 5
+        },
+        {
+          "item": "LTO Muffin",
+          "rowIndex": 6
+        },
+        {
+          "item": "Jr R B",
+          "rowIndex": 7
+        },
+        {
+          "item": "Apple Pie",
+          "rowIndex": 8
+        },
+        {
+          "item": "5 LTO Pie",
+          "rowIndex": 9
+        },
+        {
+          "item": "6 Swirls",
+          "rowIndex": 10
+        },
+        {
+          "item": "Choc . Chunk",
+          "rowIndex": 11
+        },
+        {
+          "item": "Brownie",
+          "rowIndex": 12
+        },
+        {
+          "item": "F McPop -",
+          "rowIndex": 13
+        },
+        {
+          "item": "McPop -",
+          "rowIndex": 14
+        },
+        {
+          "item": "McPop -",
+          "rowIndex": 15
+        },
+        {
+          "item": "8 McPop -",
+          "rowIndex": 16
+        },
+        {
+          "item": "प Straw Ban",
+          "rowIndex": 17
+        },
+        {
+          "item": "Blue Pom",
+          "rowIndex": 18
+        },
+        {
+          "item": "TO Mango Pine",
+          "rowIndex": 19
+        },
+        {
+          "item": "RRRR SSSS P",
+          "rowIndex": 20
+        },
+        {
+          "item": "Van . Chai",
+          "rowIndex": 21
+        },
+        {
+          "item": "Coffee Frap",
+          "rowIndex": 22
+        },
+        {
+          "item": "Choc Shake",
+          "rowIndex": 23
+        },
+        {
+          "item": "Vanilla Shake",
+          "rowIndex": 24
+        },
+        {
+          "item": "Straw Shake",
+          "rowIndex": 25
+        },
+        {
+          "item": "T R LTO Shake",
+          "rowIndex": 26
+        },
+        {
+          "item": "Wrap C G",
+          "rowIndex": 27
+        },
+        {
+          "item": "C 12 G White Milk",
+          "rowIndex": 28
+        },
+        {
+          "item": "C G Chocolate",
+          "rowIndex": 29
+        },
+        {
+          "item": "Ranch C G Apple Juice",
+          "rowIndex": 30
+        },
+        {
+          "item": "Buffalo C G Orange Juice",
+          "rowIndex": 31
+        },
+        {
+          "item": "Mayo C G Bottled Water",
+          "rowIndex": 32
+        },
+        {
+          "item": "Hot Coffee",
+          "rowIndex": 33
+        },
+        {
+          "item": "R B S Decafe Coffee",
+          "rowIndex": 34
+        },
+        {
+          "item": "13",
+          "rowIndex": 35
+        },
+        {
+          "item": "Orange Pekoe",
+          "rowIndex": 36
+        },
+        {
+          "item": "Mc 14 Earl Grey",
+          "rowIndex": 37
+        },
+        {
+          "item": "Peppermint",
+          "rowIndex": 38
+        },
+        {
+          "item": "15 Green Tea",
+          "rowIndex": 39
+        },
+        {
+          "item": "Fries - Small",
+          "rowIndex": 40
+        },
+        {
+          "item": "Fries - Medium",
+          "rowIndex": 41
+        },
+        {
+          "item": "16 Fries - Large",
+          "rowIndex": 42
+        },
+        {
+          "item": "Poutine",
+          "rowIndex": 43
+        },
+        {
+          "item": "17 Poutine",
+          "rowIndex": 44
+        },
+        {
+          "item": "McMuffin Hashbrown",
+          "rowIndex": 45
+        },
+        {
+          "item": "18 Apple Slices",
+          "rowIndex": 46
+        },
+        {
+          "item": "LTO HM",
+          "rowIndex": 47
+        },
+        {
+          "item": "Sau . Wrap 19 Yogurt Tube",
+          "rowIndex": 48
+        },
+        {
+          "item": "Wrap 20 Toy",
+          "rowIndex": 49
+        },
+        {
+          "item": "Wrap",
+          "rowIndex": 50
+        }
+      ],
+      "tableName": "Table_1_2Column"
+    },
+    {
+      "tableType": "RAW_WASTE_3COL",
+      "rows": [
+        {
+          "size": "Sauces",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 0
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "75"
+          },
+          "rowIndex": 1
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 2
+        },
+        {
+          "size": "Tube",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "76"
+          },
+          "rowIndex": 3
+        },
+        {
+          "item": "Sauce",
+          "size": "Tube",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 4
+        },
+        {
+          "item": "Sauce",
+          "size": "Tube",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "77"
+          },
+          "rowIndex": 5
+        },
+        {
+          "item": "Sauce",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 6
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "78"
+          },
+          "rowIndex": 7
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 8
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 9
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 10
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "80"
+          },
+          "rowIndex": 11
+        },
+        {
+          "item": "Portions",
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "81"
+          },
+          "rowIndex": 12
+        },
+        {
+          "size": "Breakfast Sauces",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "18"
+          },
+          "rowIndex": 13
+        },
+        {
+          "item": "Stick",
+          "size": "Stick",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "82"
+          },
+          "rowIndex": 14
+        },
+        {
+          "item": "Butter",
+          "size": "Tub",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 15
+        },
+        {
+          "item": "Cheese",
+          "size": "Tub",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "83"
+          },
+          "rowIndex": 16
+        },
+        {
+          "size": "Salad and Toppings",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 17
+        },
+        {
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "84"
+          },
+          "rowIndex": 18
+        },
+        {
+          "item": "Onions",
+          "size": "Inner",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "84"
+          },
+          "rowIndex": 19
+        },
+        {
+          "size": "Prep Table",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "85"
+          },
+          "rowIndex": 20
+        },
+        {
+          "item": "Lettuce",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "85"
+          },
+          "rowIndex": 21
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 22
+        },
+        {
+          "item": "Onions",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "86"
+          },
+          "rowIndex": 23
+        },
+        {
+          "item": "Onions",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 24
+        },
+        {
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "87"
+          },
+          "rowIndex": 25
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 26
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "88"
+          },
+          "rowIndex": 27
+        },
+        {
+          "item": "Chips",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "89"
+          },
+          "rowIndex": 28
+        },
+        {
+          "item": "Jalapenos",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "89"
+          },
+          "rowIndex": 29
+        },
+        {
+          "size": "Smoothie Machine",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 30
+        },
+        {
+          "item": "Yogurt",
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "90"
+          },
+          "rowIndex": 31
+        },
+        {
+          "item": "smth",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 32
+        },
+        {
+          "item": "smth",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 33
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 34
+        },
+        {
+          "size": "Pop",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 35
+        },
+        {
+          "size": "Box",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "93"
+          },
+          "rowIndex": 36
+        },
+        {
+          "size": "Box",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 37
+        },
+        {
+          "size": "Box",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "94"
+          },
+          "rowIndex": 38
+        },
+        {
+          "item": "Straw",
+          "size": "Box",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "94"
+          },
+          "rowIndex": 39
+        },
+        {
+          "item": "Orange",
+          "size": "Box",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 40
+        },
+        {
+          "size": "Box",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "95"
+          },
+          "rowIndex": 41
+        },
+        {
+          "size": "Box",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "95"
+          },
+          "rowIndex": 42
+        },
+        {
+          "size": "Shake and Sundae",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 43
+        },
+        {
+          "item": "Mix",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "96"
+          },
+          "rowIndex": 44
+        },
+        {
+          "item": "Syrup",
+          "size": "Jug",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 45
+        },
+        {
+          "item": "Syrup",
+          "size": "Jug",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "97"
+          },
+          "rowIndex": 46
+        },
+        {
+          "item": "Syrup",
+          "size": "Jug",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 47
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "98"
+          },
+          "rowIndex": 48
+        },
+        {
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 49
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "99"
+          },
+          "rowIndex": 50
+        },
+        {
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 51
+        }
+      ],
+      "tableName": "Table_4_3Column"
+    },
+    {
+      "tableType": "RAW_WASTE_5COL",
+      "rows": [
+        {
+          "swing": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "55"
+          },
+          "size": "Each",
+          "rowIndex": 0,
+          "close": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "56"
+          },
+          "open": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "57"
+          }
+        },
+        {
+          "item": "Bagel",
+          "swing": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "58"
+          },
+          "size": "Each",
+          "rowIndex": 1,
+          "close": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "open": {
+            "needsReview": false,
+            "isEmpty": true
+          }
+        },
+        {
+          "swing": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "size": "Each",
+          "rowIndex": 2,
+          "close": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "open": {
+            "needsReview": false,
+            "isEmpty": true
+          }
+        },
+        {
+          "swing": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "59"
+          },
+          "size": "Each",
+          "rowIndex": 3,
+          "close": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "open": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "69"
+          }
+        },
+        {
+          "item": "348",
+          "swing": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "63"
+          },
+          "size": "Each",
+          "rowIndex": 4,
+          "close": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "open": {
+            "needsReview": false,
+            "isEmpty": true
+          }
+        },
+        {
+          "swing": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "size": "Each",
+          "rowIndex": 5,
+          "close": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "57"
+          },
+          "open": {
+            "needsReview": false,
+            "isEmpty": true
+          }
+        },
+        {
+          "swing": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "size": "Bag",
+          "rowIndex": 6,
+          "close": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "open": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "73"
+          }
+        }
+      ],
+      "tableName": "Table_3_5Column"
+    },
+    {
+      "tableType": "RAW_WASTE_3COL",
+      "rows": [
+        {
+          "item": "Coffee Frappe",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 0
+        },
+        {
+          "item": "Vanilla Chal",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 1
+        },
+        {
+          "item": "McPop - Berry",
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 2
+        },
+        {
+          "item": "McPop White",
+          "size": "Choc Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 3
+        },
+        {
+          "item": "McPop . Haz",
+          "size": "\u0026 Cocoa Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 4
+        },
+        {
+          "item": "Pre Por Blueberry",
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "101"
+          },
+          "rowIndex": 5
+        },
+        {
+          "item": "Pre Por Carrot",
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 6
+        },
+        {
+          "item": "Pre Por Fruit /",
+          "size": "Fibre Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 7
+        },
+        {
+          "item": "Pre Por Cran /",
+          "size": "Org Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 8
+        },
+        {
+          "item": "Pre Por Ban /",
+          "size": "Choc Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 9
+        },
+        {
+          "item": "Pre Por LTO",
+          "size": "Muffin Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 10
+        },
+        {
+          "item": "Van Syrup",
+          "size": "Bottle",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "102"
+          },
+          "rowIndex": 11
+        },
+        {
+          "item": "Sug Fre Van",
+          "size": "Syrup Bottle",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 12
+        },
+        {
+          "item": "Caramel Syrup",
+          "size": "Bottle",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 13
+        },
+        {
+          "item": "Liquid Syrup",
+          "size": "Bottle",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 14
+        },
+        {
+          "item": "LTO Syrup",
+          "size": "Bottle",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "103"
+          },
+          "rowIndex": 15
+        },
+        {
+          "item": "Lemonade",
+          "size": "Inner",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "103"
+          },
+          "rowIndex": 16
+        },
+        {
+          "item": "Bulk Sugar",
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 17
+        },
+        {
+          "item": "Bulk Splenda",
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "104"
+          },
+          "rowIndex": 18
+        },
+        {
+          "item": "Whip Cream",
+          "size": "CAN",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "104"
+          },
+          "rowIndex": 19
+        },
+        {
+          "item": "Creamettes",
+          "size": "Each",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 20
+        },
+        {
+          "item": "Bulk Cream",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 21
+        },
+        {
+          "item": "Bulk % Milk",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 22
+        },
+        {
+          "item": "Oat Milk",
+          "size": "Bottle",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 23
+        },
+        {
+          "item": "Crème",
+          "size": "Miscellaneous",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 24
+        },
+        {
+          "item": "Egg Syrup",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "105"
+          },
+          "rowIndex": 25
+        },
+        {
+          "item": "Creme Egg",
+          "size": "Chocolate Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 26
+        },
+        {
+          "item": "Peppermint",
+          "size": "Pieces Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "106"
+          },
+          "rowIndex": 27
+        },
+        {
+          "item": "Cinnamon Powder",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 28
+        },
+        {
+          "item": "LTO Flurry Syrup",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 29
+        },
+        {
+          "item": "LTO McCafe",
+          "size": "Topping Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "107"
+          },
+          "rowIndex": 30
+        },
+        {
+          "item": "LTO Flurry",
+          "size": "Topping Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "108"
+          },
+          "rowIndex": 31
+        },
+        {
+          "item": "LTO Shake",
+          "size": "Syrup Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "108"
+          },
+          "rowIndex": 32
+        },
+        {
+          "item": "Tariyaki",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "109"
+          },
+          "rowIndex": 33
+        },
+        {
+          "item": "Rosti Chs Sauce",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": true
+          },
+          "rowIndex": 34
+        },
+        {
+          "item": "Biscoff Pcs",
+          "size": "Bag",
+          "count": {
+            "needsReview": false,
+            "isEmpty": false,
+            "value": "110"
+          },
+          "rowIndex": 35
+        }
+      ],
+      "tableName": "Table_5_3Column"
+    }
+  ],
+  "accuracyEstimate": 45.87155963302752,
+  "totalTables": 5,
+  "emptyFields": 59,
+  "totalFields": 109,
+  "fieldsNeedingReview": 0,
+  "timestamp": 1760687964395
+}

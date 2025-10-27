@@ -1,0 +1,380 @@
+RAW WASTE
+Hamburger
+Item
+Cheeseburger
+Deluxe Chs. Burger
+McDouble
+Dbl cheeseburger
+Dbl Hamburger
+COMPLETED WASTE
+Item
+Cranberry Muffin
+Item
+Size
+OPEN
+SWING
+CLOSE
+Item
+Size
+Sauces
+Count
+Item
+Size
+Count
+Fruit & Fibre Muffin
+Buns
+Carrot Muffin
+Reg Bun
+Bulk Ketchup
+Bag
+Coffee Frappe
+Bag
+Each
+TO
+1/4 Bun
+Bulk Mustard
+Bag
+Vanilla Char
+Bag
+Each
+Blueberry Muffin
+Mao Saube
+Tube
+Mac Bun
+Each
+2
+Chicken Sauce
+Tube
+Banana Choc. Muffin
+Potato Bun
+MoPop-Berry
+Each
+Each
+Tartar Sauce
+Tube
+McPop White Choc. Each
+Choc. Brownle Muffin
+Oal Bun
+Each
+Ranch Sauce
+Bag
+McPop Faz & Cocoa Each
+Junior Chicken
+LTO Muffin
+Wheat Tortilla 10'
+Each
+Habenaro
+Bag
+Sweet Chill Jr.
+R
+B
+Tortilla Shells 8'
+Each
+Chipotle
+Bag
+Pre Por Blueberry
+Each
+Big Mac
+Apple Pie
+Breakfast Bread
+Thal
+Bag
+Pré Por Carrot
+Each
+Dbl Mac
+1/4 cheese
+Dbl 1/4
+1/4 BLT
+DBI 1/4 BLT
+LTO 14
+LTO DB1 1/4
+Filet
+Double Filet
+Mc Chicken
+LTO Pie
+Swirls
+Choc, Chunk Cookie
+Brownie Cookie
+McPop Berry
+English Muffins
+Each
+Buffalo
+Bag
+Pre Por Fruit/Fibre
+Each
+Plain Bagels
+Each
+Gravy
+Bag
+Pre Por Cran/Org
+Each
+Everything Bagel
+Each
+Pre Por Ban/Choc
+Each
+Sesame Bagel
+Each
+Butter Portions
+Each
+Pre Por LTO Muffin
+Each
+Griddles
+Each
+Breakfast Sauces
+McCafe and Coffee
+Hotcakes
+Each
+McPop White Choc.
+Butter Stick
+Stick
+Van Syrup
+B6ttle
+McPop-Haz & Cocoa
+McPop-LTO
+Meat and Chicken
+Reg Meat
+Each
+Clarified Butter
+Cream Cheese
+Tub
+Sug Fre Van Syrup
+Bottle
+Tub
+Caramel Syrup
+Bottle
+O
+1/4 Meat
+Each
+Salad and Toppings
+Liquid Syrup
+Bottle
+4
+4 pack
+Straw Ban Smoothie
+6 pack
+Blue Pom Smoothie
+Fillet
+Each
+Cucumber
+Green Onions
+Each
+LTO Syrup
+Bottle
+Inner
+Lemonade
+Inner
+10 pack
+Mango Pine. Smoothie
+Grilled Chicken 348
+Each
+Prep Table
+Bulk Sugar
+Each
+20 pack
+P
+McChicken
+Each
+Shredded Lettuce
+8
+Bag
+Bulk Splenda
+Each
+McCrispy
+R
+S
+Van. Chai
+Nuggets
+Each
+Leaf Lettuce
+Bag
+Whip Cream
+CAN
+Deluxe McCrispy
+R
+S
+Coffee Frap
+Junior Chicken 158
+Each
+Slivered Onions
+Bag
+Creamettes
+Each
+Grill Chicken
+R
+S
+McCrispy
+Each
+Crispy Onions
+Bag
+Bulk Cream
+Bag
+Deluxe Grill
+R
+S
+Choc Shake
+Pizza Bites
+Each
+LTO Crispy
+LTO Grilled
+Vanilla Shake
+Straw Shake
+Bacon Strips
+Each
+Heist Burgers
+MCWrap Bacon
+Sweet Chili Wrap
+LTO Wrap
+Snack Wrap Ranch
+Sanck Wrap Buffalo
+Orange Juice
+Snack Wrap Mayo
+G
+Bottled Water
+Hot Coffee
+Hotcakes
+B
+Decafe Coffee
+Bac/Egg Mc
+Sausage Mc
+R
+LTO Shake
+Potato Product
+Fries
+Bag
+Tomatoes
+Dehyds
+Pickles
+Toririlla Chips
+Crispy Jalapenos
+Each
+Bulk 2% Milk
+Bag
+Bag
+Oat Milk
+Bottle
+Bag
+Bag
+Bag
+White Milk
+Hash Browns
+Each
+Chocolate Milk
+Eggs
+Smoothie Yogurt
+Smoothie Machine
+Each
+Miscellaneous
+Bag
+Crème Egg Syrup
+Crème Egg Chocolate Bag
+Peppermint Pieces Bag
+Cinnamon Powder
+Bag
+Apple Juice
+Straw ban smth
+Bag
+LTO Flurry Syrup
+Bag
+Eggs
+Each
+Blue pom smth
+Bag
+LTO McCafe Topping
+Bag
+Burrito Mix
+Bag
+Mango smth
+Bag
+LTO Flurry Topping
+Bag
+LTO Smoothie
+Bag
+LTO Shake Syrup
+Bag
+Pop
+Breakfast Meat
+Coke
+Box
+Tariyaki
+Bag
+Sausage
+Each
+Diet Coke
+Box
+Rosti Chs Sauce Bag
+BLT Bagel
+Sausage/Egg Mc
+Egg McMuffin
+Chicken McMuffin
+Bac/Egg Griddle
+Saus/Egg Griddle
+Saus/Griddle
+Bac/Egg Bagel
+Egg LT Bagel
+Blt Chicken McMuffin
+Bit Egg McMuffin
+Burritos
+Bfast Bac. Sau. Wrap
+Bfast Spicy Wrap
+Bfast Chicken Wrap
+Orange Pekoe Tea
+Earl Grey Tea
+|Peppermint Tea
+Green Tea
+Fries Small
+Fries
+Fries-Large
+Poutine
+Poutine LTO
+Hashbrown
+LTO HM Side
+Cdn Bacon
+Each
+Root Beer
+Box
+Cheeses
+Cheese Slices
+Each
+Fruitopia Straw
+Box
+Biscoff Pcs
+Bag
+Fruitopia Orange
+Box
+Shredded Cheese
+Bag
+Sprite
+Box
+Cheese Curds
+Each
+Iced Tea
+Box
+Seasonings
+Shake and Sundae
+Medium
+Grill seasoning
+Bag
+Shake Mix
+Bag
+Bulk salt
+Box
+LTO Fry Seasoning
+Bag
+Vanilla Syrup
+Jug
+Strawberry Syrup
+Jug
+Chocolate Syrup
+Jug
+3
+Oreo
+Bag
+Apple Slices
+Cone
+Each
+Caramel
+Bag
+Yogurt Tube
+Toy
+Fudge
+Bag
