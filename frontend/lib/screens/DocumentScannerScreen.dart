@@ -197,11 +197,8 @@ class _DocumentScannerScreenState extends State<DocumentScannerScreen> {
         children: [
           // Camera preview
           Center(
-            child: AspectRatio(
-              aspectRatio: _cameraController!.value.aspectRatio,
-              child: CameraPreview(_cameraController!),
-            ),
-          ),
+  child: CameraPreview(_cameraController!),
+),
           
           // Corner overlay
           if (_detectedCorners != null)
