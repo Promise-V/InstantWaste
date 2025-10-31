@@ -385,6 +385,9 @@ String _getEmptyMessage(FieldFilter filter) {
               _build3ColumnFields(context, row)
             else
               _build2ColumnFields(context, row),
+              // SIMPLE COMMENTS SECTION - Add this at the end
+          const SizedBox(height: 12),
+          _buildCommentsSection(context, row),
           ],
         ),
       ),
@@ -436,6 +439,75 @@ String _getEmptyMessage(FieldFilter filter) {
       field: row.count,
     );
   }
+  Widget _buildCommentsSection(BuildContext context, WasteRow row) {
+  return GestureDetector(
+    onTap: () => _showCommentsDialog(context, row),
+    child: Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: row.comments.isEmpty ? Colors.grey[50] : Colors.blue[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey[300]!),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.comment,
+            color: row.comments.isEmpty ? Colors.grey : Colors.blue,
+            size: 20,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              row.comments.isEmpty ? "Tap to add comments..." : row.comments,
+              style: TextStyle(
+                color: row.comments.isEmpty ? Colors.grey : Colors.black87,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+void _showCommentsDialog(BuildContext context, WasteRow row) {
+  final controller = TextEditingController(text: row.comments);
+
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Add Comments'),
+      content: TextField(
+        controller: controller,
+        maxLines: 4,
+        decoration: const InputDecoration(
+          hintText: 'Enter comments about this item...',
+          border: OutlineInputBorder(),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              row.comments = controller.text; // This will now save properly
+            });
+            _onFieldEdited();
+            Navigator.pop(context);
+          },
+          child: const Text('Save'),
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildEditableField(
     BuildContext context, {
@@ -516,70 +588,71 @@ String _getEmptyMessage(FieldFilter filter) {
   }
 
   void _showEditDialog(BuildContext context, String label, FieldData field) {
-    final controller = TextEditingController(text: field.value);
+  final controller = TextEditingController(text: field.value);
 
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Edit $label'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (field.needsReview && field.issue.isNotEmpty)
-              Container(
-                padding: const EdgeInsets.all(12),
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: Colors.orange.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.orange.shade300),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.warning_amber, color: Colors.orange.shade700),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        field.issue,
-                        style: TextStyle(
-                          color: Colors.orange.shade900,
-                          fontSize: 12,
-                        ),
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text('Edit $label'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (field.needsReview && field.issue.isNotEmpty)
+            Container(
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: Colors.orange.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.orange.shade300),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.warning_amber, color: Colors.orange.shade700),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      field.issue,
+                      style: TextStyle(
+                        color: Colors.orange.shade900,
+                        fontSize: 12,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            TextField(
-              controller: controller,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: label,
-                border: const OutlineInputBorder(),
-                hintText: 'Enter value',
-              ),
-              autofocus: true,
             ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              field.value = controller.text;
-              _onFieldEdited();
-              Navigator.pop(context);
-            },
-            child: const Text('Save'),
+          TextField(
+            controller: controller,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: label,
+              border: const OutlineInputBorder(),
+              hintText: 'Enter value',
+            ),
+            autofocus: true,
           ),
         ],
       ),
-    );
-  }
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              field.updateValue(controller.text); // Use the new method
+            });
+            _onFieldEdited();
+            Navigator.pop(context);
+          },
+          child: const Text('Save'),
+        ),
+      ],
+    ),
+  );
+}
 }
 
 // ✅ Helper class to pair table with row

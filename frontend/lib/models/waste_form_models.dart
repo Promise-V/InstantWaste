@@ -140,11 +140,12 @@ enum TableType {
 /// Represents a single row in a waste table
 class WasteRow {
   final String item;
-  final FieldData open;
-  final FieldData swing;
-  final FieldData close;
-  final FieldData size;
-  final FieldData count;
+  FieldData open; // Remove 'final'
+  FieldData swing; // Remove 'final'
+  FieldData close; // Remove 'final'
+  FieldData size; // Remove 'final'
+  FieldData count; // Remove 'final'
+  String comments = ""; // NEW: Add comments field
 
   WasteRow({
     required this.item,
@@ -153,6 +154,7 @@ class WasteRow {
     required this.close,
     required this.size,
     required this.count,
+    this.comments = "", // NEW: constructor with default value
   });
 
   factory WasteRow.fromJson(Map<String, dynamic> json) {
@@ -163,6 +165,7 @@ class WasteRow {
       close: FieldData.fromJson(json['close'] ?? {}),
       size: FieldData.fromJson(json['size'] ?? {}),
       count: FieldData.fromJson(json['count'] ?? {}),
+      comments: json['comments'] ?? '',
     );
   }
 
@@ -174,6 +177,7 @@ class WasteRow {
       'close': close.toJson(),
       'size': size.toJson(),
       'count': count.toJson(),
+      'comments': comments, 
     };
   }
   
@@ -218,9 +222,9 @@ enum FieldFilter {
 /// Represents a single field with validation metadata
 class FieldData {
   String value;
-  final bool isEmpty;
-  final bool needsReview;
-  final String issue;
+  bool isEmpty; // Remove 'final'
+  bool needsReview; // Remove 'final'
+  String issue; // Remove 'final'
   String _originalValue;
 
   FieldData({
@@ -229,6 +233,14 @@ class FieldData {
     required this.needsReview,
     required this.issue,
   }) : _originalValue = value;
+
+// NEW: a simple constructor for creating editable fields
+  FieldData.editable(String initialValue) 
+    : value = initialValue,
+      isEmpty = initialValue.isEmpty,
+      needsReview = false,
+      issue = '',
+      _originalValue = initialValue;
 
   factory FieldData.fromJson(Map<String, dynamic> json) {
     return FieldData(
@@ -249,7 +261,13 @@ class FieldData {
   }
 
   bool get wasEdited => value != _originalValue;
-
+  // NEW: method to update the value and recalculate properties
+  void updateValue(String newValue) {
+    value = newValue;
+    isEmpty = newValue.trim().isEmpty;
+    needsReview = false; // Assume user has reviewed it
+    issue = ''; // Clear any issues when user edits
+  }
   Color getStatusColor() {
     if (needsReview) return Colors.orange;
     if (isEmpty) return Colors.red.shade100;
