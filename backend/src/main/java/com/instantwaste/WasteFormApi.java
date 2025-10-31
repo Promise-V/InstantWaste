@@ -1,7 +1,5 @@
 package com.instantwaste;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +13,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.UUID;
 
-@SpringBootApplication
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(
@@ -29,12 +26,12 @@ public class WasteFormApi {
     private final Map<String, Double> progressStore = new HashMap<>();
     private final Map<String, String> messageStore = new HashMap<>();
 
-    public static void main(String[] args) {
-        SpringApplication.run(WasteFormApi.class, args);
-        System.out.println("\n✅ Instant Waste API Server Started!");
-        System.out.println("🌐 API running at: http://localhost:8080");
-        System.out.println("📝 Health check: http://localhost:8080/api/health\n");
-    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(WasteFormApi.class, args);
+//        System.out.println("\n✅ Instant Waste API Server Started!");
+//        System.out.println("🌐 API running at: http://localhost:8080");
+//        System.out.println("📝 Health check: http://localhost:8080/api/health\n");
+//    }
     /**
      * PASS 2: Fill empty fields from masked OCR numbers
      */
