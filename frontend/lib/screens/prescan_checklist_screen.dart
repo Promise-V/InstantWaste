@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:opencv_dart/opencv_dart.dart' as cv;
 import 'scan_processing_screen.dart';
-//import 'capture_screen.dart';
+import 'ml_scanner_screen.dart'; 
 import '../widgets/progress_indicator.dart';
-import 'DocumentScannerScreen.dart';
+import 'dart:math' as math;
 
 class PreScanChecklistScreen extends StatefulWidget {
   final File imageFile;
@@ -33,36 +33,43 @@ class _PreScanChecklistScreenState extends State<PreScanChecklistScreen> {
   }
   
   /// Apply perspective correction (deskewing) if corners are available
-  Future<void> _applyCorrectionIfNeeded() async {
-    // If no corners provided, just show original image
-    if (widget.corners == null || widget.corners!.length != 4) {
-      setState(() {
-        _correctedImageFile = widget.imageFile;
-        _isProcessing = false;
-      });
-      return;
-    }
-    
-    try {
-      // Apply perspective correction using corners
-      final correctedFile = await _applyPerspectiveCorrection(
-        widget.imageFile,
-        widget.corners!,
-      );
-      
-      setState(() {
-        _correctedImageFile = correctedFile;
-        _isProcessing = false;
-      });
-    } catch (e) {
-      // If correction fails, fall back to original
-      setState(() {
-        _correctedImageFile = widget.imageFile;
-        _isProcessing = false;
-        _errorMessage = 'Using original image (correction failed)';
-      });
-    }
+Future<void> _applyCorrectionIfNeeded() async {
+  print("🖼️ Starting image processing...");
+  
+  // If no corners provided (ML Kit already cropped), just use the image directly
+  if (widget.corners == null || widget.corners!.length != 4) {
+    print("🖼️ No corners provided - using image as-is (already cropped by ML Kit)");
+    setState(() {
+      _correctedImageFile = widget.imageFile;
+      _isProcessing = false;
+    });
+    return;
   }
+  
+  // If corners ARE provided (from old custom scanner), apply perspective correction
+  try {
+    print("🖼️ Applying perspective correction...");
+    final correctedFile = await _applyPerspectiveCorrection(
+      widget.imageFile,
+      widget.corners!,
+    );
+    
+    print("🖼️ ✅ Correction successful");
+    setState(() {
+      _correctedImageFile = correctedFile;
+      _isProcessing = false;
+    });
+  } catch (e, stackTrace) {
+    print("🖼️ ❌ Correction failed: $e");
+    print("🖼️ ❌ Stack: $stackTrace");
+    // If correction fails, fall back to original
+    setState(() {
+      _correctedImageFile = widget.imageFile;
+      _isProcessing = false;
+      _errorMessage = 'Using original image (correction failed)';
+    });
+  }
+}
   
   /// Applies perspective correction to straighten the document
   /// 
@@ -72,12 +79,24 @@ class _PreScanChecklistScreenState extends State<PreScanChecklistScreen> {
   /// 
   /// Real-world example: A receipt photographed at an angle gets straightened
   /// to look like a flat scan, making OCR much more accurate.
-  Future<File> _applyPerspectiveCorrection(
-    File imageFile,
-    List<Map<String, double>> normalizedCorners,
-  ) async {
+ Future<File> _applyPerspectiveCorrection(
+  File imageFile,
+  List<Map<String, double>> normalizedCorners,
+) async {
+  cv.Mat? srcImage;
+  cv.Mat? correctedImage;
+  cv.Mat? transformMatrix;
+  cv.VecPoint? srcCornersMat;
+  cv.VecPoint? dstCorners;
+  
+  try {
+    print("🖼️ Reading image from: ${imageFile.path}");
+    print("🖼️ File exists: ${await imageFile.exists()}");
+    
     // Load image
-    final cv.Mat srcImage = cv.imread(imageFile.path);
+    srcImage = cv.imread(imageFile.path);
+    print("🖼️ Image loaded: ${srcImage.cols}x${srcImage.rows}");
+    
     final double imageWidth = srcImage.cols.toDouble();
     final double imageHeight = srcImage.rows.toDouble();
     
@@ -89,10 +108,13 @@ class _PreScanChecklistScreenState extends State<PreScanChecklistScreen> {
       );
     }).toList();
     
+    print("🖼️ Corners in pixels: $corners");
+    
     // Order corners: top-left, top-right, bottom-right, bottom-left
     final orderedCorners = _orderCorners(corners);
+    print("🖼️ Ordered corners: $orderedCorners");
     
-    // Calculate output dimensions (use max width/height to preserve detail)
+    // Calculate output dimensions
     final double widthTop = _distance(orderedCorners[0], orderedCorners[1]);
     final double widthBottom = _distance(orderedCorners[2], orderedCorners[3]);
     final double heightLeft = _distance(orderedCorners[0], orderedCorners[3]);
@@ -105,20 +127,23 @@ class _PreScanChecklistScreenState extends State<PreScanChecklistScreen> {
         ? heightLeft.round() 
         : heightRight.round();
     
+    print("🖼️ Output size: ${outputWidth}x${outputHeight}");
+    
     // Define destination corners (rectangle)
-    final dstCorners = cv.VecPoint.fromList([
-      cv.Point(0, 0), // top-left
-      cv.Point(outputWidth, 0), // top-right
-      cv.Point(outputWidth, outputHeight), // bottom-right
-      cv.Point(0, outputHeight), // bottom-left
+    dstCorners = cv.VecPoint.fromList([
+      cv.Point(0, 0),
+      cv.Point(outputWidth, 0),
+      cv.Point(outputWidth, outputHeight),
+      cv.Point(0, outputHeight),
     ]);
     
     // Calculate perspective transform matrix
-    final srcCornersMat = cv.VecPoint.fromList(orderedCorners);
-    final transformMatrix = cv.getPerspectiveTransform(srcCornersMat, dstCorners);
+    srcCornersMat = cv.VecPoint.fromList(orderedCorners);
+    transformMatrix = cv.getPerspectiveTransform(srcCornersMat, dstCorners);
     
+    print("🖼️ Applying warp...");
     // Apply transformation
-    final cv.Mat correctedImage = cv.warpPerspective(
+    correctedImage = cv.warpPerspective(
       srcImage,
       transformMatrix,
       (outputWidth, outputHeight),
@@ -126,15 +151,28 @@ class _PreScanChecklistScreenState extends State<PreScanChecklistScreen> {
     
     // Save corrected image
     final correctedPath = imageFile.path.replaceAll('.jpg', '_corrected.jpg');
+    print("🖼️ Saving to: $correctedPath");
     cv.imwrite(correctedPath, correctedImage);
     
-    // Clean up
-    srcImage.dispose();
-    correctedImage.dispose();
-    transformMatrix.dispose();
+    print("🖼️ ✅ Perspective correction complete");
     
     return File(correctedPath);
+    
+  } catch (e, stackTrace) {
+    print("🖼️ ❌ Error in _applyPerspectiveCorrection: $e");
+    print("🖼️ ❌ Stack: $stackTrace");
+    rethrow;
+  } finally {
+    // Clean up ALL OpenCV objects
+    print("🖼️ Cleaning up OpenCV objects...");
+    srcImage?.dispose();
+    correctedImage?.dispose();
+    transformMatrix?.dispose();
+    srcCornersMat?.dispose();
+    dstCorners?.dispose();
+    print("🖼️ Cleanup complete");
   }
+}
   
   /// Order corners clockwise from top-left
   List<cv.Point> _orderCorners(List<cv.Point> points) {
@@ -162,11 +200,11 @@ class _PreScanChecklistScreenState extends State<PreScanChecklistScreen> {
   }
   
   /// Calculate distance between two points
-  double _distance(cv.Point p1, cv.Point p2) {
-    final dx = p1.x - p2.x.toDouble();
-    final dy = p1.y - p2.y.toDouble();
-    return (dx * dx + dy * dy).abs();
-  }
+double _distance(cv.Point p1, cv.Point p2) {
+  final dx = p1.x - p2.x.toDouble();
+  final dy = p1.y - p2.y.toDouble();
+  return math.sqrt(dx * dx + dy * dy); // ✅ CORRECT - actual distance
+}
 
   @override
   Widget build(BuildContext context) {
@@ -332,26 +370,28 @@ class _PreScanChecklistScreenState extends State<PreScanChecklistScreen> {
                     const SizedBox(height: 40),
                     
                     // Action Buttons
-                    Row(
-                      children: [
-                        // Retake Button
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: _isProcessing ? null : () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const DocumentScannerScreen(),
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF0000FF),
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
+Row(
+  children: [
+    // Retake Button
+    Expanded(
+      child: ElevatedButton(
+        onPressed: _isProcessing ? null : () {
+          // Replace current screen stack with new ML scanner
+          Navigator.of(context).popUntil((route) => route.isFirst); // Go to home
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MLScannerScreen(),
+            ),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF0000FF),
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
                             child: const Text(
                               'RETAKE',
                               style: TextStyle(

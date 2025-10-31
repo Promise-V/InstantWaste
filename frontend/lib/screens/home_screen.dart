@@ -1,9 +1,9 @@
-import 'dart:io'; // ADD THIS - for File class
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:instant_waste/screens/DocumentScannerScreen.dart';
-import 'package:instant_waste/screens/prescan_checklist_screen.dart'; // ADD THIS
-//import 'capture_screen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:instant_waste/screens/prescan_checklist_screen.dart';
 import 'manual_entry_screen.dart';
+import 'ml_scanner_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -83,30 +83,11 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       // Automatic Entry Button
-                  ElevatedButton.icon(
-                                onPressed: () async {
-                                  final result = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const DocumentScannerScreen(),
-                                    ),
-                                  );
-                                  
-                                  if (result != null) {
-                                    // Convert path string to File
-                                    final imageFile = File(result['imagePath']);
-                                    
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PreScanChecklistScreen(
-                                          imageFile: imageFile,
-                                          corners: result['corners'], // Pass corners for deskewing
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                },
+                      ElevatedButton.icon(
+                        onPressed: () async {
+                          // Show dialog with Camera or Gallery options
+                          _showScanOptions(context);
+                        },
                         icon: const Icon(Icons.camera_alt, size: 28),
                         label: const Text(
                           'Automatic Entry',
@@ -126,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                       
                       const SizedBox(height: 16),
                       
-                      // Manual Entry Button - NOW CONNECTED!
+                      // Manual Entry Button
                       OutlinedButton.icon(
                         onPressed: () {
                           Navigator.push(
@@ -164,6 +145,107 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Show Camera or Gallery options
+  void _showScanOptions(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (BuildContext context) {
+      return SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Choose Source',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              
+              // Camera option (ML Kit)
+              ListTile(
+                leading: const Icon(Icons.camera_alt, color: Color(0xFF0000FF), size: 32),
+                title: const Text('Scan with Camera', style: TextStyle(fontSize: 18)),
+                subtitle: const Text('Auto-detect document edges'),
+                onTap: () {
+                  Navigator.pop(context); // Close bottom sheet
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MLScannerScreen(), // ✅ Navigate to intermediate screen
+                    ),
+                  );
+                },
+              ),
+              
+              const Divider(),
+              
+              // Gallery option
+              ListTile(
+                leading: const Icon(Icons.photo_library, color: Color(0xFF0000FF), size: 32),
+                title: const Text('Pick from Gallery', style: TextStyle(fontSize: 18)),
+                subtitle: const Text('Choose existing photo'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _pickFromGallery(context);
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+  // Gallery Picker
+  Future<void> _pickFromGallery(BuildContext context) async {
+    try {
+      print("📸 Opening gallery...");
+      
+      final ImagePicker picker = ImagePicker();
+      final XFile? pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+      );
+      
+      if (pickedFile != null) {
+        final imageFile = File(pickedFile.path);
+        
+        print("✅ Image picked: ${imageFile.path}");
+        
+        if (context.mounted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PreScanChecklistScreen(
+                imageFile: imageFile,
+                corners: null,
+              ),
+            ),
+          );
+        }
+      }
+      
+    } catch (e) {
+      print("❌ Gallery error: $e");
+      
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to pick image: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   Widget _buildProcessStep(String emoji, String title, String description) {

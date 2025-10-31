@@ -5,6 +5,10 @@
         android:label="instant_waste"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+         <!-- ADD THIS -->
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="document_scanner" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
