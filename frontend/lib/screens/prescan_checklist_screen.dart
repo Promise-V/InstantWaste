@@ -6,15 +6,19 @@ import 'scan_processing_screen.dart';
 import 'ml_scanner_screen.dart'; 
 import '../widgets/progress_indicator.dart';
 import 'dart:math' as math;
+import 'gallery_picker_screen.dart';
 
 class PreScanChecklistScreen extends StatefulWidget {
   final File imageFile;
-  final List<Map<String, double>>? corners; // Add corners parameter
+  final List<Map<String, double>>? corners;
+  final bool fromGallery;
+   // Add corners parameter
 
   const PreScanChecklistScreen({
     super.key,
     required this.imageFile,
     this.corners, // Optional - if null, show original
+    this.fromGallery = false, // Default to false
   });
 
   @override
@@ -372,26 +376,38 @@ double _distance(cv.Point p1, cv.Point p2) {
                     // Action Buttons
 Row(
   children: [
-    // Retake Button
-    Expanded(
-      child: ElevatedButton(
-        onPressed: _isProcessing ? null : () {
-          // Replace current screen stack with new ML scanner
-          Navigator.of(context).popUntil((route) => route.isFirst); // Go to home
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const MLScannerScreen(),
-            ),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF0000FF),
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+// Retake Button
+Expanded(
+  child: ElevatedButton(
+    onPressed: _isProcessing ? null : () {
+      // Navigate to appropriate screen based on source
+      if (widget.fromGallery) {
+        // Pop to home, then push gallery picker
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const GalleryPickerScreen(),
           ),
-        ),
+        );
+      } else {
+        // Pop to home, then push ML scanner
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MLScannerScreen(),
+          ),
+        );
+      }
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: const Color(0xFF0000FF),
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+    ),
                             child: const Text(
                               'RETAKE',
                               style: TextStyle(

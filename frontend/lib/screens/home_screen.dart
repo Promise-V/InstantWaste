@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:instant_waste/screens/prescan_checklist_screen.dart';
 import 'manual_entry_screen.dart';
 import 'ml_scanner_screen.dart';
+import 'gallery_picker_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -147,8 +148,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Show Camera or Gallery options
-  void _showScanOptions(BuildContext context) {
+// Show Camera or Gallery options
+void _showScanOptions(BuildContext context) {
   showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(
@@ -180,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MLScannerScreen(), // ✅ Navigate to intermediate screen
+                      builder: (context) => const MLScannerScreen(),
                     ),
                   );
                 },
@@ -194,8 +195,13 @@ class HomeScreen extends StatelessWidget {
                 title: const Text('Pick from Gallery', style: TextStyle(fontSize: 18)),
                 subtitle: const Text('Choose existing photo'),
                 onTap: () {
-                  Navigator.pop(context);
-                  _pickFromGallery(context);
+                  Navigator.pop(context); // Close bottom sheet
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const GalleryPickerScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -206,47 +212,6 @@ class HomeScreen extends StatelessWidget {
   );
 }
 
-  // Gallery Picker
-  Future<void> _pickFromGallery(BuildContext context) async {
-    try {
-      print("📸 Opening gallery...");
-      
-      final ImagePicker picker = ImagePicker();
-      final XFile? pickedFile = await picker.pickImage(
-        source: ImageSource.gallery,
-      );
-      
-      if (pickedFile != null) {
-        final imageFile = File(pickedFile.path);
-        
-        print("✅ Image picked: ${imageFile.path}");
-        
-        if (context.mounted) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PreScanChecklistScreen(
-                imageFile: imageFile,
-                corners: null,
-              ),
-            ),
-          );
-        }
-      }
-      
-    } catch (e) {
-      print("❌ Gallery error: $e");
-      
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Failed to pick image: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
-  }
 
   Widget _buildProcessStep(String emoji, String title, String description) {
     return Padding(
