@@ -263,19 +263,10 @@ public class WasteFormApi {
         System.out.println("🔄 Progress: " + (progress * 100) + "% - " + message);
     }
     // === ADD THIS METHOD - it's your existing process but with progress calls ===
-    private void processWithProgress(String sessionId, MultipartFile imageFile) throws Exception {
-        String imagePath = null;
+    private void processWithProgress(String sessionId, String imagePath) throws Exception {
 
         try {
             updateProgress(sessionId, 0.1, "Uploading image...");
-
-            // Save uploaded file temporarily (your existing code)
-            Path tempFile = Files.createTempFile("waste_form_", ".jpg");
-            imagePath = tempFile.toString();
-            try (var inputStream = imageFile.getInputStream()) {
-                Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
-            }
-
             updateProgress(sessionId, 0.2, "Starting OCR analysis...");
 
             // Initialize components (your existing code)
@@ -588,16 +579,36 @@ public class WasteFormApi {
     public ResponseEntity<?> processWasteFormWithProgress(@RequestParam("image") MultipartFile imageFile) {
         String sessionId = UUID.randomUUID().toString();
 
-        // Start processing in background
-        new Thread(() -> {
-            try {
-                processWithProgress(sessionId, imageFile);
-            } catch (Exception e) {
-                updateProgress(sessionId, 0.0, "Error: " + e.getMessage());
-            }
-        }).start();
+        try {
+            // ✅ Save the file FIRST, before starting the thread
+            Path tempFile = Files.createTempFile("waste_form_", ".jpg");
+            String savedImagePath = tempFile.toString();
 
-        return ResponseEntity.ok(Map.of("sessionId", sessionId));
+            // Copy the uploaded file to our own temp location
+            try (var inputStream = imageFile.getInputStream()) {
+                Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            System.out.println("📸 Saved uploaded image to: " + savedImagePath);
+
+            // Now start background processing with the saved file path
+            new Thread(() -> {
+                try {
+                    processWithProgress(sessionId, savedImagePath);
+                } catch (Exception e) {
+                    updateProgress(sessionId, 0.0, "Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }).start();
+
+            return ResponseEntity.ok(Map.of("sessionId", sessionId));
+
+        } catch (Exception e) {
+            System.err.println("❌ Failed to save uploaded file: " + e.getMessage());
+            return ResponseEntity.status(500).body(Map.of(
+                    "error", "Failed to save image: " + e.getMessage()
+            ));
+        }
     }
 
     @PostMapping("/waste-form/submit")

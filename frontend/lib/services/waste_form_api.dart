@@ -8,7 +8,7 @@ class WasteFormApi {
   // For Android emulator: http://10.0.2.2:8080
   // For iOS simulator: http://localhost:8080
   // For physical device: http://YOUR_COMPUTER_IP:8080
-  static const String baseUrl = 'https://instantwaste-519509549362.us-central1.run.app/api';
+  static const String baseUrl = 'https://instant-waste-519509549362.us-central1.run.app/api';
 
   /// ========== EXISTING METHODS (Keep these) ==========
   
@@ -138,11 +138,11 @@ class WasteFormApi {
       
       print('📥 Start OCR response: ${response.statusCode}');
       
-      if (response.statusCode == 200) {
-        final sessionId = response.body;
-        print('✅ OCR started successfully! Session ID: $sessionId');
-        return sessionId;
-      } else {
+ if (response.statusCode == 200) {
+    final jsonData = json.decode(response.body);
+    final sessionId = jsonData['sessionId'];
+    return sessionId;
+} else {
         throw Exception('Failed to start OCR: ${response.statusCode}');
       }
     } catch (e) {
