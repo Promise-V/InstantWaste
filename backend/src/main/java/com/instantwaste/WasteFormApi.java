@@ -20,7 +20,7 @@ import java.util.*;
 @CrossOrigin(
         origins = "*",
         allowedHeaders = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS, RequestMethod.PUT, RequestMethod.DELETE}
 )
 public class WasteFormApi {
 
