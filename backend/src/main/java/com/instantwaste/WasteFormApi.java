@@ -580,24 +580,28 @@ public class WasteFormApi {
         String sessionId = UUID.randomUUID().toString();
 
         try {
-            // ✅ Save the file FIRST, before starting the thread
-            Path tempFile = Files.createTempFile("waste_form_", ".jpg");
+            // ✅ CRITICAL: Save the file BEFORE starting background thread
+            // Otherwise Spring will delete it when the request completes
+            Path tempFile = Files.createTempFile("waste_form_session_", ".jpg");
             String savedImagePath = tempFile.toString();
 
-            // Copy the uploaded file to our own temp location
+            System.out.println("📸 Saving uploaded image for session: " + sessionId);
+
+            // Copy uploaded file to our own temp location
             try (var inputStream = imageFile.getInputStream()) {
                 Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
             }
 
-            System.out.println("📸 Saved uploaded image to: " + savedImagePath);
+            System.out.println("💾 Saved to: " + savedImagePath);
 
-            // Now start background processing with the saved file path
+            // Now start background processing with the FILE PATH (not MultipartFile)
             new Thread(() -> {
                 try {
                     processWithProgress(sessionId, savedImagePath);
                 } catch (Exception e) {
-                    updateProgress(sessionId, 0.0, "Error: " + e.getMessage());
+                    System.err.println("❌ Background processing failed: " + e.getMessage());
                     e.printStackTrace();
+                    updateProgress(sessionId, 0.0, "Error: " + e.getMessage());
                 }
             }).start();
 
@@ -605,6 +609,7 @@ public class WasteFormApi {
 
         } catch (Exception e) {
             System.err.println("❌ Failed to save uploaded file: " + e.getMessage());
+            e.printStackTrace();
             return ResponseEntity.status(500).body(Map.of(
                     "error", "Failed to save image: " + e.getMessage()
             ));
