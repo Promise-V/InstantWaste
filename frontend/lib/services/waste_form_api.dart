@@ -8,7 +8,7 @@ class WasteFormApi {
   // For Android emulator: http://10.0.2.2:8080
   // For iOS simulator: http://localhost:8080
   // For physical device: http://YOUR_COMPUTER_IP:8080
-  static const String baseUrl = 'https://instantwaste-production.up.railway.app/api';
+  static const String baseUrl = 'https://instantwaste-519509549362.us-central1.run.app/api';
 
   /// Upload image and get scan results
   Future<ScanResult> processWasteForm(File imageFile) async {
