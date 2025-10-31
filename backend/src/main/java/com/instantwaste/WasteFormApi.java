@@ -638,4 +638,9 @@ public class WasteFormApi {
             ));
         }
     }
+    @PostMapping("/test-simple")
+    public ResponseEntity<?> testSimple() {
+        System.out.println("✅ SIMPLE POST ENDPOINT WORKING!");
+        return ResponseEntity.ok("Simple POST works!");
+    }
 }
