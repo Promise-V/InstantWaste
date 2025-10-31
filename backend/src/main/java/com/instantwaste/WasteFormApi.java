@@ -25,6 +25,8 @@ import java.util.*;
 public class WasteFormApi {
 
     private final Gson gson = new Gson();
+    private final Map<String, Double> progressStore = new HashMap<>();
+    private final Map<String, String> messageStore = new HashMap<>();
 
     public static void main(String[] args) {
         SpringApplication.run(WasteFormApi.class, args);
@@ -256,6 +258,141 @@ public class WasteFormApi {
 
         return maskedPath;
     }
+    // Helper method to update progress
+    private void updateProgress(String sessionId, double progress, String message) {
+        progressStore.put(sessionId, progress);
+        messageStore.put(sessionId, message);
+        System.out.println("🔄 Progress: " + (progress * 100) + "% - " + message);
+    }
+    // === ADD THIS METHOD - it's your existing process but with progress calls ===
+    private void processWithProgress(String sessionId, MultipartFile imageFile) throws Exception {
+        String imagePath = null;
+
+        try {
+            updateProgress(sessionId, 0.1, "Uploading image...");
+
+            // Save uploaded file temporarily (your existing code)
+            Path tempFile = Files.createTempFile("waste_form_", ".jpg");
+            imagePath = tempFile.toString();
+            try (var inputStream = imageFile.getInputStream()) {
+                Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            updateProgress(sessionId, 0.2, "Starting OCR analysis...");
+
+            // Initialize components (your existing code)
+            ItemMatcher itemMatcher = new ItemMatcher();
+
+            // PASS 1: Full OCR
+            updateProgress(sessionId, 0.3, "Performing initial OCR...");
+            List<VisionOcr.TextBlock> blocks = VisionOcr.performOcrWithBoundingBoxes(imagePath, false);
+
+            updateProgress(sessionId, 0.4, "Detecting tables...");
+            List<TableSegmenter.Table> tables = TableSegmenter.segmentTables(blocks);
+
+            updateProgress(sessionId, 0.5, "Parsing table data...");
+            Map<TableSegmenter.Table, List<ImprovedTableParser.ValidatedRow>> pass1ResultsMap = new HashMap<>();
+            for (TableSegmenter.Table table : tables) {
+                List<ImprovedTableParser.ValidatedRow> validatedRows =
+                        ImprovedTableParser.parseTableWithValidation(table, table.data, itemMatcher);
+                pass1ResultsMap.put(table, validatedRows);
+            }
+
+            // PASS 2: Masked OCR
+            updateProgress(sessionId, 0.6, "Running enhanced OCR pass...");
+            System.out.println("\n========== PASS 2: MASKED OCR ==========");
+            try {
+                String maskedImagePath = TableSegmenter.createIntelligentMaskedImage(imagePath, tables, blocks);
+                String upscaledPath = TableSegmenter.upscaleImage(maskedImagePath, 2.0);
+
+                updateProgress(sessionId, 0.7, "Analyzing masked image...");
+                List<VisionOcr.TextBlock> pass2Blocks = VisionOcr.performOcrWithBoundingBoxes(upscaledPath, false);
+
+                // Scale coordinates back (your existing code)
+                for (VisionOcr.TextBlock block : pass2Blocks) {
+                    block.x = block.x / 2;
+                    block.y = block.y / 2;
+                }
+
+                // Extract only numeric values (your existing code)
+                List<VisionOcr.TextBlock> pass2Numbers = new ArrayList<>();
+                for (VisionOcr.TextBlock block : pass2Blocks) {
+                    if (block.text.matches("\\d+")) {
+                        pass2Numbers.add(block);
+                    }
+                }
+
+                updateProgress(sessionId, 0.75, "Filling empty fields...");
+                System.out.println("Pass 2 detected " + pass2Numbers.size() + " numbers!");
+                fillEmptyFieldsWithPass2(pass2Numbers, pass1ResultsMap, tables);
+
+            } catch (Exception e) {
+                System.err.println("⚠️ Pass 2 failed, but Pass 1 data preserved: " + e.getMessage());
+            }
+
+            // PASS 3: Ultra-Aggressive Cell Masking
+            boolean ENABLE_PASS_3 = true;
+            if (ENABLE_PASS_3) {
+                updateProgress(sessionId, 0.8, "Running final OCR pass...");
+                System.out.println("\n========== PASS 3: CELL-ONLY MASKING ==========");
+                try {
+                    String pass3MaskedPath = createNumberCellOnlyMask(imagePath, tables, pass1ResultsMap);
+                    String pass3UpscaledPath = TableSegmenter.upscaleImage(pass3MaskedPath, 2.5);
+
+                    updateProgress(sessionId, 0.85, "Analyzing cell data...");
+                    List<VisionOcr.TextBlock> pass3Blocks = VisionOcr.performOcrWithBoundingBoxes(pass3UpscaledPath, false);
+
+                    // Scale coordinates back (your existing code)
+                    for (VisionOcr.TextBlock block : pass3Blocks) {
+                        block.x = (int)(block.x / 2.5);
+                        block.y = (int)(block.y / 2.5);
+                    }
+
+                    // Extract only numeric values (your existing code)
+                    List<VisionOcr.TextBlock> pass3Numbers = new ArrayList<>();
+                    for (VisionOcr.TextBlock block : pass3Blocks) {
+                        if (block.text.matches("\\d+")) {
+                            pass3Numbers.add(block);
+                        }
+                    }
+
+                    updateProgress(sessionId, 0.9, "Final validation...");
+                    System.out.println("Pass 3 detected " + pass3Numbers.size() + " numbers!");
+                    fillEmptyFieldsWithPass3(pass3Numbers, pass1ResultsMap, tables);
+
+                } catch (Exception e) {
+                    System.err.println("⚠️ Pass 3 failed, but Pass 1+2 data preserved: " + e.getMessage());
+                }
+            }
+
+            updateProgress(sessionId, 0.95, "Generating final results...");
+
+            // Generate review JSON (your existing code)
+            String reviewJSON = WasteFormReviewGenerator.generateReviewJSONFromValidatedRows(pass1ResultsMap);
+
+            updateProgress(sessionId, 1.0, "Completed! Ready for review.");
+
+            // Store the final result (so Flutter can get it)
+            progressStore.put(sessionId + "_result", 1.0); // Using as flag
+            messageStore.put(sessionId + "_result", reviewJSON);
+
+            System.out.println("✅ OCR processing complete!");
+
+        } catch (Exception e) {
+            updateProgress(sessionId, 0.0, "Error: " + e.getMessage());
+            throw e;
+        } finally {
+            // Your existing cleanup code...
+            if (imagePath != null) {
+                try {
+                    Files.deleteIfExists(Paths.get(imagePath));
+                    System.out.println("🗑️ Cleaned up temp file");
+                } catch (IOException e) {
+                    System.err.println("⚠️ Could not delete temp file: " + e.getMessage());
+                }
+            }
+        }
+    }
 
     @GetMapping("/health")
     public ResponseEntity<?> healthCheck() {
@@ -280,6 +417,40 @@ public class WasteFormApi {
                 "status", "ok",
                 "message", "Instant Waste API - v1.0.0"
         ));
+    }
+    // Check progress
+    @GetMapping("/waste-form/progress/{sessionId}")
+    public ResponseEntity<?> getProgress(@PathVariable String sessionId) {
+        Double progress = progressStore.get(sessionId);
+        String message = messageStore.get(sessionId);
+
+        if (progress == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(Map.of(
+                "progress", progress,
+                "message", message != null ? message : "Processing..."
+        ));
+    }
+    // === ADD THIS METHOD ===
+    @GetMapping("/waste-form/result/{sessionId}")
+    public ResponseEntity<?> getResult(@PathVariable String sessionId) {
+        String result = messageStore.get(sessionId + "_result");
+
+        if (result == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Clean up
+        progressStore.remove(sessionId);
+        messageStore.remove(sessionId);
+        progressStore.remove(sessionId + "_result");
+        messageStore.remove(sessionId + "_result");
+
+        return ResponseEntity.ok()
+                .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                .body(result);
     }
     @RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> handleOptions() {
@@ -413,6 +584,22 @@ public class WasteFormApi {
                 }
             }
         }
+    }
+    // Start OCR with progress tracking
+    @PostMapping("/waste-form/process-with-progress")
+    public ResponseEntity<?> processWasteFormWithProgress(@RequestParam("image") MultipartFile imageFile) {
+        String sessionId = UUID.randomUUID().toString();
+
+        // Start processing in background
+        new Thread(() -> {
+            try {
+                processWithProgress(sessionId, imageFile);
+            } catch (Exception e) {
+                updateProgress(sessionId, 0.0, "Error: " + e.getMessage());
+            }
+        }).start();
+
+        return ResponseEntity.ok(Map.of("sessionId", sessionId));
     }
 
     @PostMapping("/waste-form/submit")
