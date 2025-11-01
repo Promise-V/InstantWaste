@@ -320,7 +320,7 @@ public class WasteFormApi {
             }
 
             // PASS 3: Ultra-Aggressive Cell Masking
-            boolean ENABLE_PASS_3 = true;
+            boolean ENABLE_PASS_3 = false;
             if (ENABLE_PASS_3) {
                 updateProgress(sessionId, 0.8, "Running final OCR pass...");
                 System.out.println("\n========== PASS 3: CELL-ONLY MASKING ==========");
