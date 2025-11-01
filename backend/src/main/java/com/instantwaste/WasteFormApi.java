@@ -292,15 +292,15 @@ public class WasteFormApi {
             System.out.println("\n========== PASS 2: MASKED OCR ==========");
             try {
                 String maskedImagePath = TableSegmenter.createIntelligentMaskedImage(imagePath, tables, blocks);
-                String upscaledPath = TableSegmenter.upscaleImage(maskedImagePath, 2.0);
+                String upscaledPath = TableSegmenter.upscaleImage(maskedImagePath, 1.5);
 
                 updateProgress(sessionId, 0.7, "Analyzing masked image...");
                 List<VisionOcr.TextBlock> pass2Blocks = VisionOcr.performOcrWithBoundingBoxes(upscaledPath, false);
 
                 // Scale coordinates back (your existing code)
                 for (VisionOcr.TextBlock block : pass2Blocks) {
-                    block.x = block.x / 2;
-                    block.y = block.y / 2;
+                    block.x = (int)(block.x / 1.5); // Was /2
+                    block.y = (int)(block.y / 1.5); // Was /2
                 }
 
                 // Extract only numeric values (your existing code)
