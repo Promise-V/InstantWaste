@@ -1,7 +1,7 @@
-import 'dart:io';
+// import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:instant_waste/screens/prescan_checklist_screen.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:instant_waste/screens/prescan_checklist_screen.dart';
 import 'manual_entry_screen.dart';
 import 'ml_scanner_screen.dart';
 import 'gallery_picker_screen.dart';
